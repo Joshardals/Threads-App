@@ -3,6 +3,7 @@ import { currentUser } from "@clerk/nextjs";
 
 const page = async () => {
   const user = await currentUser();
+  if (!user) return null;
 
   const userInfo = {};
 
@@ -14,6 +15,7 @@ const page = async () => {
     bio: userInfo?.bio || "",
     image: userInfo?.image || user?.imageUrl,
   };
+
   return (
     <main
       className="mx-auto flex flex-col max-w-3xl justify-start
