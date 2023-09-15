@@ -13,7 +13,7 @@ type Params = {
   path: string;
 };
 
-export async function upadateUser({
+export async function updateUser({
   userId,
   username,
   name,
@@ -21,8 +21,8 @@ export async function upadateUser({
   image,
   path,
 }: Params): Promise<void> {
-  connectToDB();
   try {
+    connectToDB();
     await User.findOneAndUpdate(
       { id: userId },
       {
@@ -40,5 +40,14 @@ export async function upadateUser({
     }
   } catch (error: any) {
     throw new Error(`Failed to create/update user: ${error.message}`);
+  }
+}
+
+export async function fetchUser(userId: string) {
+  try {
+    connectToDB();
+    return await User.findOne({ id: userId });
+  } catch (error: any) {
+    throw new Error(`Failed to fetch user: ${error.message}`);
   }
 }

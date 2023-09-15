@@ -19,7 +19,7 @@ import { ChangeEvent, useState } from "react";
 import { Textarea } from "../ui/textarea";
 import { isBase64Image } from "@/lib/utils";
 import { useUploadThing } from "@/lib/uploadthing";
-import { upadateUser } from "@/lib/actions/user.actions";
+import { updateUser } from "@/lib/actions/user.actions";
 import { usePathname, useRouter } from "next/navigation";
 
 type UserProps = {
@@ -75,7 +75,6 @@ const AccountProfile = ({ user, btnTitle }: UserProps) => {
   };
 
   const onSubmit = async (values: UserValidationType) => {
-    console.log(values);
     const blob = values.profile_photo;
 
     const hasImagechanged = isBase64Image(blob);
@@ -88,7 +87,7 @@ const AccountProfile = ({ user, btnTitle }: UserProps) => {
       }
     }
 
-    await upadateUser({
+    await updateUser({
       userId: user.id,
       username: values.username,
       name: values.name,
