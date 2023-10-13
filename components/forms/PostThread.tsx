@@ -46,7 +46,6 @@ const PostThread = ({ userId }: { userId: string }) => {
       accountId: userId,
     },
   });
-  console.log(organization?.id);
   const onSubmit = async (values: ThreadValidationType) => {
     await createThread({
       text: values.thread,
